@@ -1,7 +1,7 @@
 
 
 const home = (req, res) => {
-    res.send("Ronaldo es manco!");
+    res.send("Hola Mundo!");
 };
 
 module.exports = {

@@ -1,7 +1,12 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+
+const URI = process.env.MONGODB_URI;
+const DB_NAME = process.env.MONGODB_DB_NAME || 'contactsdb';
 
 const MongoClient = require('mongodb').MongoClient;
 
+let client;
 let db;
 
 const initDb = (callback) => {
@@ -10,9 +15,11 @@ const initDb = (callback) => {
         return callback(null, db);
     }
 
-    MongoClient.connect(process.env.MONGODB_URI)
+    
+
+    MongoClient.connect(URI)
     .then((client) => {
-        db = client;
+        db = client.db(DB_NAME);
         console.log('Database initialized');
         callback(null, db);
     })

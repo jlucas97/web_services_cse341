@@ -1,11 +1,14 @@
-const express = require('../node_modules/express');
-const mongoDB = require('./data/database');
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
-const app = express();
+const express = require('express');
+const mongoDB = require('./data/database');
 const routes = require('./routes/');
 
+const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
 app.use('/', routes);
 
 mongoDB.initDb((err) => {
