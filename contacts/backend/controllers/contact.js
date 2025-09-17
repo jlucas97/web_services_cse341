@@ -9,10 +9,14 @@ const getAllContacts = async (req, res) => {
       .getDb()
       .collection('contacts')
       .find({})
-      .toArray();
-
-    res.status(200).json(contacts);
-};
+      .toArray((err, lists) => {
+          if (err) {
+              res.status(400).json({ message: 'An error occurred while fetching contacts.' });
+          }
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(lists);
+          });
+    };  
 
 const getContact = async (req, res) => {
   // #swagger.tags = ['Contacts']
@@ -21,13 +25,21 @@ const getContact = async (req, res) => {
     const contact = await mongoDB
       .getDb()
       .collection('contacts')
-      .findOne({ _id: new ObjectId(id) });
+      .findOne({ _id: new ObjectId(id) })
+      .toArray((err, lists) => {
+          if (err) {
+              res.status(400).json({ message: 'An error occurred while fetching contacts.' });
+          }
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(lists[0]);
+          });
 
      res.status(200).json(contact)
 };
 
 const createContact = async (req, res) => {
   // #swagger.tags = ['Contacts']
+ 
     const contact = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -49,6 +61,9 @@ const createContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   // #swagger.tags = ['Contacts']
+   if(!ObjectId.isValid(req.params.id)){
+    res.status(400).json('Must use a valid contact id to update a contact.');
+  }
     const contactId = new ObjectId(req.params.id);
     const contact = {
         firstName: req.body.firstName,
@@ -65,12 +80,15 @@ const updateContact = async (req, res) => {
       if (response.modifiedCount > 0) {
         res.status(204).send();
       } else {
-        res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+        res.status(500).json(response.error || 'Some error occurred while updating the contact.');
       }
 };
 
 const deleteContact = async (req, res) => {
   // #swagger.tags = ['Contacts']
+   if(!ObjectId.isValid(req.params.id)){
+    res.status(400).json('Must use a valid contact id to delete a contact.');
+  }
     const contactId = new ObjectId(req.params.id);
     
     const response = await mongoDB
@@ -80,7 +98,7 @@ const deleteContact = async (req, res) => {
       if (response.deletedCount > 0) {
         res.status(204).send();
       } else {
-        res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+        res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
       }
 };
 
