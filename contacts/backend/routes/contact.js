@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const contactController = require('../controllers/contact');
-const validation = require('../middleware/validation');
+const validation = require('../middleware/validation.js');
 
 router.get('/contacts', contactController.getAllContacts);
 
