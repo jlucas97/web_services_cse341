@@ -5,8 +5,8 @@ const doc = {
         title: 'API',
         description: 'API for countries and songs',
     },
-    host: 'localhost:3001',
-    schemes: ['http', 'https'],
+    host: 'https://web-services-contacts.onrender.com',
+    schemes: ['https'],
 };
 
 const outputFile = './swagger.json';
