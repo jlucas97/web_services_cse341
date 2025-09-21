@@ -5,34 +5,95 @@
     "description": "API for countries and songs",
     "version": "1.0.0"
   },
-  "host": "localhost:3001",
+  "host": "https://webservices-cse341-et2u.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
     "/songs": {
       "get": {
+        "tags": [
+          "Songs"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
+        "tags": [
+          "Songs"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Song payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Smells Like Teen Spirit"
+                },
+                "artist": {
+                  "type": "string",
+                  "example": "Nirvana"
+                },
+                "album": {
+                  "type": "string",
+                  "example": "Nevermind"
+                },
+                "releaseYear": {
+                  "type": "number",
+                  "example": 1991
+                },
+                "genre": {
+                  "type": "string",
+                  "example": "Grunge"
+                }
+              },
+              "required": [
+                "title",
+                "artist",
+                "album"
+              ]
+            }
+          }
+        ],
         "responses": {
+          "201": {
+            "description": "Created"
+          },
           "412": {
             "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/songs/{id}": {
       "get": {
+        "tags": [
+          "Songs"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -42,12 +103,24 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -55,15 +128,66 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Song payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Smells Like Teen Spirit"
+                },
+                "artist": {
+                  "type": "string",
+                  "example": "Nirvana"
+                },
+                "album": {
+                  "type": "string",
+                  "example": "Nevermind"
+                },
+                "releaseYear": {
+                  "type": "number",
+                  "example": 1991
+                },
+                "genre": {
+                  "type": "string",
+                  "example": "Grunge"
+                }
+              },
+              "required": [
+                "title",
+                "artist",
+                "album"
+              ]
+            }
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "412": {
             "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -74,33 +198,103 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/countries": {
       "get": {
+        "tags": [
+          "Countries"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
+        "tags": [
+          "Countries"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Costa Rica"
+                },
+                "capital": {
+                  "type": "string",
+                  "example": "San José"
+                },
+                "region": {
+                  "type": "string",
+                  "example": "Central America"
+                },
+                "population": {
+                  "type": "number",
+                  "example": 5000000
+                },
+                "areaKm2": {
+                  "type": "number",
+                  "example": 51100
+                }
+              },
+              "required": [
+                "name",
+                "capital",
+                "region"
+              ]
+            }
+          }
+        ],
         "responses": {
+          "201": {
+            "description": "Created"
+          },
           "412": {
             "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/countries/{id}": {
       "get": {
+        "tags": [
+          "Countries"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -110,12 +304,24 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
+        "tags": [
+          "Countries"
+        ],
         "description": "",
         "parameters": [
           {
@@ -123,15 +329,65 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Costa Rica"
+                },
+                "capital": {
+                  "type": "string",
+                  "example": "San José"
+                },
+                "region": {
+                  "type": "string",
+                  "example": "Central America"
+                },
+                "population": {
+                  "type": "number",
+                  "example": 5000000
+                },
+                "areaKm2": {
+                  "type": "number",
+                  "example": 51100
+                }
+              },
+              "required": [
+                "name",
+                "capital",
+                "region"
+              ]
+            }
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "412": {
             "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
+        "tags": [
+          "Countries"
+        ],
         "description": "",
         "parameters": [
           {
@@ -142,8 +398,17 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

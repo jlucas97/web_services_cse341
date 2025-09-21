@@ -1,10 +1,8 @@
-const e = require('express');
 const mongoDB = require('../data/database');
 const { ObjectId } = require('mongodb');
 
-// GET all songs
 const getAllSongs = async (req, res) => {
-  // #swagger.tags = ['Music']
+  // #swagger.tags = ['Songs']
   try {
     const songs = await mongoDB
       .getDb()
@@ -15,13 +13,12 @@ const getAllSongs = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(songs);
   } catch (err) {
-    res.status(400).json({ message: 'An error occurred while fetching songs.' });
+    res.status(500).json({ message: 'An error occurred while fetching songs.' });
   }
 };
 
-// GET one song by ID
 const getSong = async (req, res) => {
-  // #swagger.tags = ['Music']
+  // #swagger.tags = ['Songs']
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json('Must use a valid song id to fetch a song.');
@@ -44,16 +41,28 @@ const getSong = async (req, res) => {
   }
 };
 
-// CREATE a new song
 const createSong = async (req, res) => {
-  // #swagger.tags = ['Music']
+  // #swagger.tags = ['Songs']
+ /* #swagger.parameters['obj'] = {
+      in: "body",
+      description: "Song payload",
+      required: true,
+      schema: {
+        "$title": "Smells Like Teen Spirit",
+        "$artist": "Nirvana",
+        "$album": "Nevermind",
+        "releaseYear": 1991,
+        "genre": "Grunge"
+      }
+} */
+
   try {
     const song = {
       title: req.body.title,
       artist: req.body.artist,
       album: req.body.album,
-      releaseYear: body.releaseYear,
-      genre: req.body.genre
+      releaseYear: req.body.releaseYear,
+      genre: req.body.genre,
     };
 
     const response = await mongoDB
@@ -71,9 +80,20 @@ const createSong = async (req, res) => {
   }
 };
 
-// UPDATE a song
 const updateSong = async (req, res) => {
-  // #swagger.tags = ['Music']
+  // #swagger.tags = ['Songs']
+ /* #swagger.parameters['obj'] = {
+      in: "body",
+      description: "Song payload",
+      required: true,
+      schema: {
+        "$title": "Smells Like Teen Spirit",
+        "$artist": "Nirvana",
+        "$album": "Nevermind",
+        "releaseYear": 1991,
+        "genre": "Grunge"
+      }
+} */
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json('Must use a valid song id to update a song.');
@@ -84,8 +104,8 @@ const updateSong = async (req, res) => {
       title: req.body.title,
       artist: req.body.artist,
       album: req.body.album,
-      releaseYear: body.releaseYear,
-      genre: req.body.genre
+      releaseYear: req.body.releaseYear,
+      genre: req.body.genre,
     };
 
     const response = await mongoDB
@@ -103,9 +123,8 @@ const updateSong = async (req, res) => {
   }
 };
 
-// DELETE a song
 const deleteSong = async (req, res) => {
-  // #swagger.tags = ['Music']
+  // #swagger.tags = ['Songs']
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json('Must use a valid song id to delete a song.');
@@ -132,5 +151,5 @@ module.exports = {
   getSong,
   createSong,
   updateSong,
-  deleteSong
+  deleteSong,
 };

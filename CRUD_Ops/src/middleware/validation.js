@@ -1,47 +1,50 @@
-const validator = require('validator');
+const Validator = require('validatorjs');
 
 const saveCountry = (req, res, next) => {
-    const validationRule = {
-        name: 'required|string',
-        capital: 'required|string',
-        region: 'required|string'
-    }
+  const validationRule = {
+    name: 'required|string',
+    capital: 'required|string',
+    region: 'required|string',
+    population: 'integer',  
+    areaKm2: 'numeric'      
+  };
 
-    validator(req.body, validationRule, {}, (err, status) => {
-        if (!status) {
-            res.status(412).send({
-                success: false,
-                message: 'Validation failed',
-                data: err
-            });
-        } else {
-            next();
-        }   
+  const validation = new Validator(req.body, validationRule);
+
+  if (validation.fails()) {
+    return res.status(412).send({
+      success: false,
+      message: 'Validation failed',
+      data: validation.errors.all(),
     });
-}
+  }
+
+  next();
+};
 
 const saveSong = (req, res, next) => {
-    const validationRule = {
-        title: 'required|string',
-        artist: 'required|string',
-        album: 'required|string',
-    }
+  const validationRule = {
+    title: 'required|string',
+    artist: 'required|string',
+    album: 'required|string',
+    releaseYear: 'integer', 
+    genre: 'string'        
+  };
 
-    validator(req.body, validationRule, {}, (err, status) => {
-        if (!status) {
-            res.status(412).send({
-                success: false,
-                message: 'Validation failed',
-                data: err
-            });
-        } else {
-            next();
-        }   
+  const validation = new Validator(req.body, validationRule);
+
+  if (validation.fails()) {
+    return res.status(412).send({
+      success: false,
+      message: 'Validation failed',
+      data: validation.errors.all(),
     });
-}
+  }
 
+  next();
+};
 
 module.exports = {
-    saveCountry,
-    saveSong
+  saveCountry,
+  saveSong,
 };

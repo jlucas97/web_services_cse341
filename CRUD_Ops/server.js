@@ -11,6 +11,7 @@ const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Accept, Content-Type, Z-Key');
