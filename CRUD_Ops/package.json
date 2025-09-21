@@ -1,0 +1,26 @@
+{
+  "name": "crud_ops",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start-dev": "nodemon server.js"
+  },
+  "author": "Lucas Castillo jeanlucascastillo@hotmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "i": "^0.3.7",
+    "mongodb": "^6.20.0",
+    "nodemon": "^3.1.10",
+    "swagger-ui": "^5.29.0",
+    "swagger-ui-express": "^5.0.1",
+    "validator": "^13.15.15"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
+  }
+}

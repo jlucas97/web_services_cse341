@@ -1,0 +1,58 @@
+
+### Get all countries
+GET http://localhost:3001/country
+
+### Get a single country by ID
+GET http://localhost:3001/country/68cf530b02cca7b97bb1bc57
+
+### Create a new country
+POST http://localhost:3001/country HTTP/1.1
+Content-Type: application/json
+{
+    "name": "Canada",
+    "capital": "Ottawa",
+    "region": "North America"
+}
+
+### Update an existing country by ID
+PUT http://localhost:3001/country/68cf530b02cca7b97bb1bc57 HTTP/1.1
+Content-Type: application/json
+{
+    "name": "Canada",
+    "capital": "Ottawa",
+    "region": "North America"
+}
+
+### Delete a country by ID
+DELETE http://localhost:3001/country/68cf530b02cca7b97bb1bc57
+
+
+
+### Get all songs
+GET http://localhost:3001/song
+
+### Get a single song by ID
+GET http://localhost:3001/song/68cf74bf02cca7b97bb1bc62
+
+### Create a new song
+POST http://localhost:3001/song HTTP/1.1
+Content-Type: application/json
+{
+  "title": "Sweet Child o' Mine",
+  "artist": "Guns N' Roses",
+  "album": "Appetite for Destruction",
+  "releaseYear": "1987"
+}
+
+### Update an existing song by ID
+PUT http://localhost:3001/song/68cf74bf02cca7b97bb1bc62 HTTP/1.1
+Content-Type: application/json
+{
+  "title": "Sweet Child o' Mine",
+  "artist": "Guns N' Roses",
+  "album": "Appetite for Destruction",
+  "releaseYear": "1987"
+}
+
+### Delete a song by ID
+DELETE http://localhost:3001/song/68cf74bf02cca7b97bb1bc62
