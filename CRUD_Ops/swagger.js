@@ -5,7 +5,7 @@ const doc = {
         title: 'API',
         description: 'API for countries and songs',
     },
-    host: 'https://web-services-contacts.onrender.com',
+    host: 'web-services-contacts.onrender.com',
     schemes: ['https'],
 };
 
