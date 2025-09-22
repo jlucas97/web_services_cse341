@@ -5,7 +5,7 @@
     "description": "API for countries and songs",
     "version": "1.0.0"
   },
-  "host": "webservices-cse341-et2u.onrender.com",
+  "host": "web-services-contacts.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
