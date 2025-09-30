@@ -8,9 +8,6 @@ const DB_NAME = process.env.DB_NAME || process.env.DATABASE_NAME;
 
 let _db;
 
-console.log("👉 Loaded MONGODB_URI:", process.env.MONGODB_URI);
-console.log("👉 Loaded DB_NAME:", process.env.DB_NAME);
-
 // Initialize the database connection
 const initDb = (callback) => {
   if (_db) {

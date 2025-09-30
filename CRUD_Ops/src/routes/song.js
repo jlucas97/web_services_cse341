@@ -3,15 +3,36 @@ const router = express.Router();
 
 const songController = require('../controllers/song');
 const validation = require('../middleware/validation');
+const { isAuthenticated } = require('../middleware/authenticate');
 
+// Get all songs
 router.get('/songs', songController.getAllSongs);
 
+// Get single song by ID 
 router.get('/songs/:id', songController.getSong);
 
-router.post('/songs', validation.saveSong, songController.createSong);
+// Create new song (auth + validation)
+router.post(
+  '/songs',
+  isAuthenticated,
+  validation.saveSong,
+  songController.createSong
+);
 
-router.put('/songs/:id', validation.saveSong, songController.updateSong);
+// Update existing song (auth + validation)
+router.put(
+  '/songs/:id',
+  isAuthenticated,
+  validation.saveSong,
+  songController.updateSong
+);
 
-router.delete('/songs/:id', songController.deleteSong);
+// Delete a song (auth only)
+router.delete(
+  '/songs/:id',
+  (req, res, next) => { console.log("DELETE /songs/:id hit"); next(); },
+  isAuthenticated,
+  songController.deleteSong
+);
 
 module.exports = router;

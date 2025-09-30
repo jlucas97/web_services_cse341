@@ -5,237 +5,130 @@
     "description": "API for countries and songs",
     "version": "1.0.0"
   },
-  "host": "web-services-contacts.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "securityDefinitions": {
+    "githubAuth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://github.com/login/oauth/authorize",
+      "tokenUrl": "https://github.com/login/oauth/access_token",
+      "flow": "accessCode",
+      "scopes": {}
+    }
+  },
   "paths": {
     "/songs": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Songs"],
+        "description": "Get all songs",
+        "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "post": {
-        "tags": [
-          "Songs"
-        ],
-        "description": "",
+        "tags": ["Songs"],
+        "description": "Create a new song",
+        "security": [{ "githubAuth": [] }],
         "parameters": [
           {
             "name": "obj",
             "in": "body",
-            "description": "Song payload",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
-                  "type": "string",
-                  "example": "Smells Like Teen Spirit"
-                },
-                "artist": {
-                  "type": "string",
-                  "example": "Nirvana"
-                },
-                "album": {
-                  "type": "string",
-                  "example": "Nevermind"
-                },
-                "releaseYear": {
-                  "type": "number",
-                  "example": 1991
-                },
-                "genre": {
-                  "type": "string",
-                  "example": "Grunge"
-                }
+                "title": { "type": "string", "example": "Smells Like Teen Spirit" },
+                "artist": { "type": "string", "example": "Nirvana" },
+                "album": { "type": "string", "example": "Nevermind" },
+                "releaseYear": { "type": "number", "example": 1991 },
+                "genre": { "type": "string", "example": "Grunge" }
               },
-              "required": [
-                "title",
-                "artist",
-                "album"
-              ]
+              "required": ["title", "artist", "album"]
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "201": { "description": "Created" },
+          "412": { "description": "Precondition Failed" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
     "/songs/{id}": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Songs"],
+        "description": "Get a song by ID",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "put": {
-        "tags": [
-          "Songs"
-        ],
-        "description": "",
+        "tags": ["Songs"],
+        "description": "Update a song",
+        "security": [{ "githubAuth": [] }],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "obj",
             "in": "body",
-            "description": "Song payload",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
-                  "type": "string",
-                  "example": "Smells Like Teen Spirit"
-                },
-                "artist": {
-                  "type": "string",
-                  "example": "Nirvana"
-                },
-                "album": {
-                  "type": "string",
-                  "example": "Nevermind"
-                },
-                "releaseYear": {
-                  "type": "number",
-                  "example": 1991
-                },
-                "genre": {
-                  "type": "string",
-                  "example": "Grunge"
-                }
+                "title": { "type": "string" },
+                "artist": { "type": "string" },
+                "album": { "type": "string" },
+                "releaseYear": { "type": "number" },
+                "genre": { "type": "string" }
               },
-              "required": [
-                "title",
-                "artist",
-                "album"
-              ]
+              "required": ["title", "artist", "album"]
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" },
+          "412": { "description": "Precondition Failed" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "delete": {
-        "tags": [
-          "Songs"
-        ],
-        "description": "",
+        "tags": ["Songs"],
+        "description": "Delete a song",
+        "security": [{ "githubAuth": [] }],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
     "/countries": {
       "get": {
-        "tags": [
-          "Countries"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Countries"],
+        "description": "Get all countries",
+        "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "post": {
-        "tags": [
-          "Countries"
-        ],
-        "description": "",
+        "tags": ["Countries"],
+        "description": "Create a new country",
+        "security": [{ "githubAuth": [] }],
         "parameters": [
           {
             "name": "obj",
@@ -244,92 +137,43 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Costa Rica"
-                },
-                "capital": {
-                  "type": "string",
-                  "example": "San José"
-                },
-                "region": {
-                  "type": "string",
-                  "example": "Central America"
-                },
-                "population": {
-                  "type": "number",
-                  "example": 5000000
-                },
-                "areaKm2": {
-                  "type": "number",
-                  "example": 51100
-                }
+                "name": { "type": "string", "example": "Costa Rica" },
+                "capital": { "type": "string", "example": "San José" },
+                "region": { "type": "string", "example": "Central America" },
+                "population": { "type": "number", "example": 5000000 },
+                "areaKm2": { "type": "number", "example": 51100 }
               },
-              "required": [
-                "name",
-                "capital",
-                "region"
-              ]
+              "required": ["name", "capital", "region"]
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "201": { "description": "Created" },
+          "412": { "description": "Precondition Failed" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
     "/countries/{id}": {
       "get": {
-        "tags": [
-          "Countries"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Countries"],
+        "description": "Get a country by ID",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "put": {
-        "tags": [
-          "Countries"
-        ],
-        "description": "",
+        "tags": ["Countries"],
+        "description": "Update a country",
+        "security": [{ "githubAuth": [] }],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "obj",
             "in": "body",
@@ -337,89 +181,44 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Costa Rica"
-                },
-                "capital": {
-                  "type": "string",
-                  "example": "San José"
-                },
-                "region": {
-                  "type": "string",
-                  "example": "Central America"
-                },
-                "population": {
-                  "type": "number",
-                  "example": 5000000
-                },
-                "areaKm2": {
-                  "type": "number",
-                  "example": 51100
-                }
+                "name": { "type": "string" },
+                "capital": { "type": "string" },
+                "region": { "type": "string" },
+                "population": { "type": "number" },
+                "areaKm2": { "type": "number" }
               },
-              "required": [
-                "name",
-                "capital",
-                "region"
-              ]
+              "required": ["name", "capital", "region"]
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" },
+          "412": { "description": "Precondition Failed" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "delete": {
-        "tags": [
-          "Countries"
-        ],
-        "description": "",
+        "tags": ["Countries"],
+        "description": "Delete a country",
+        "security": [{ "githubAuth": [] }],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
     "/api-docs": {
       "get": {
-        "description": "",
+        "description": "Swagger UI",
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "default": { "description": "" }
         }
       }
     }
